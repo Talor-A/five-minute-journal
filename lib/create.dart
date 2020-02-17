@@ -1,36 +1,52 @@
 import 'main.dart';
 import 'package:flutter/material.dart';
 
+String contentPlaceholder = '''today, my mood was: 😌
+one word to describe my feelings: content
+''';
+
 class CreatePageState extends State {
   Entry entry;
-  TextEditingController _controller;
+  TextEditingController _content;
+  TextEditingController _title;
+  Function createFunc;
 
-  CreatePageState(this.entry);
+  CreatePageState(this.entry, this.createFunc);
 
   @override
   void initState() {
     super.initState();
-    _controller = new TextEditingController(text: '');
+    _title = new TextEditingController(text: 'My Day');
+    _content = new TextEditingController(text: contentPlaceholder);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _content.dispose();
+    _title.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var textf = TextField(
+    var titleField = TextField(
+      autocorrect: true,
+      onChanged: (value) => this.setState(() {
+        entry.title = value;
+      }),
+      controller: _title,
+      maxLines: 1,
+      autofocus: true,
+    );
+    var contentField = TextField(
       autocorrect: true,
       onChanged: (value) => this.setState(() {
         entry.content = value;
       }),
-      controller: _controller,
+      controller: _content,
       maxLines: null,
       keyboardType: TextInputType.multiline,
       textInputAction: TextInputAction.newline,
-      autofocus: true,
     );
 
     return Scaffold(
@@ -39,11 +55,17 @@ class CreatePageState extends State {
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
-        child: textf,
+        child: Column(children: [
+          titleField,
+          contentField,
+        ]),
       ),
-      floatingActionButton: _controller.text.length > 0
+      floatingActionButton: _content.text.length > 0 && _title.text.length > 0
           ? FloatingActionButton(
-              onPressed: null,
+              onPressed: () {
+                createFunc(_title.text, _content.text);
+                Navigator.pop(context);
+              },
               child: Icon(Icons.done),
             )
           : null,
@@ -53,8 +75,9 @@ class CreatePageState extends State {
 
 class CreatePage extends StatefulWidget {
   final Entry entry = new Entry('', '');
+  Function createFunc;
 
-  CreatePage({Key key});
+  CreatePage(this.createFunc);
 
-  CreatePageState createState() => CreatePageState(entry);
+  CreatePageState createState() => CreatePageState(entry, createFunc);
 }

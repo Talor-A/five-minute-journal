@@ -45,7 +45,9 @@ class Entry {
 }
 
 Entry createEntry(int index) {
-  return Entry('Entry $index', 'entry content');
+  return Entry('Entry $index', '''change me! 
+text entries will autosave.
+also try creating a new entry with the + button on the list screen. 😉''');
 }
 
 class MyApp extends StatelessWidget {
@@ -73,6 +75,13 @@ class MyApp extends StatelessWidget {
 
 class FirstRouteState extends State<FirstRoute> {
   var entries = List<Entry>.generate(1, createEntry);
+
+  void routeCreateEntry(title, content) {
+    setState(() {
+      entries.add(new Entry(title, content));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +92,9 @@ class FirstRouteState extends State<FirstRoute> {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => CreatePage()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CreatePage(routeCreateEntry)));
           // setState(() {
           //   entries.add(createEntry(entries.length));
           // });
