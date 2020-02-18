@@ -1,4 +1,4 @@
-import 'main.dart';
+import 'data/Entry.dart';
 import 'package:flutter/material.dart';
 
 class DetailsState extends State {
@@ -27,6 +27,7 @@ class DetailsState extends State {
         entry.content = value;
       }),
       controller: _controller,
+      decoration: InputDecoration(border: InputBorder.none),
       maxLines: null,
       keyboardType: TextInputType.multiline,
       textInputAction: TextInputAction.newline,
@@ -38,7 +39,21 @@ class DetailsState extends State {
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
-        child: textf,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Notes',
+              style: Theme.of(context).textTheme.headline,
+            ),
+            textf,
+            Text(
+              'Todos',
+              style: Theme.of(context).textTheme.headline,
+            ),
+            Text('Todos: still todo! 😯')
+          ],
+        ),
       ),
     );
   }

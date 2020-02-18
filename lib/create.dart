@@ -1,3 +1,4 @@
+import 'data/Entry.dart';
 import 'main.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +75,7 @@ class CreatePageState extends State {
 }
 
 class CreatePage extends StatefulWidget {
-  final Entry entry = new Entry('', '');
+  final Entry entry = new Entry();
   Function createFunc;
 
   CreatePage(this.createFunc);
