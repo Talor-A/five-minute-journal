@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_day_1/utils/bubble_indication_painter.dart';
 import 'package:flutter_day_1/style/theme.dart' as Theme;
-import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);

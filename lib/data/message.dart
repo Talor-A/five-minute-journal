@@ -40,6 +40,7 @@ class Message {
     var snap = await ref.get();
 
     Message msg = Message._fromMap(snap.data, ref.documentID);
+    return msg;
   }
 
   update() {

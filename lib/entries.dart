@@ -1,28 +1,36 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_day_1/data/Entry.dart';
+import 'package:flutter_day_1/data/entry.dart';
+import 'package:flutter_day_1/data/user.dart';
 import 'package:flutter_day_1/widget/test.dart';
+import 'package:provider/provider.dart';
 
 import 'details.dart';
 
-class FirstRouteState extends State<FirstRoute> {
-  var entries = List<Entry>();
-
-  void routeCreateEntry(title, content) {
-    setState(() {
-      entries.add(new Entry(content: content));
-    });
-  }
-
+class FirstRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<User>(context);
+
+    return StreamProvider<List<Entry>>(
+      create: (context) => user.getEntries(),
+      child: EntriesList(),
+    );
+  }
+}
+
+class EntriesList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var entries = Provider.of<List<Entry>>(context);
+
     return Scaffold(
-      body: ListView.builder(itemBuilder: (context, index) {
-        if (index > entries.length) return null;
-        if (index == entries.length) return TestInkwellWidget();
-        return _buildRow(context, entries[index]);
-      }),
+      body: ListView.builder(
+          itemCount: entries.length,
+          itemBuilder: (BuildContext context, int index) {
+            return _buildRow(context, entries[index]);
+          }),
     );
   }
 }
@@ -30,8 +38,7 @@ class FirstRouteState extends State<FirstRoute> {
 Widget _buildRow(context, Entry entry) {
   return ListTile(
     title: Text(entry.date()),
-    subtitle:
-        Text(entry.content.substring(0, min(entry.content.length - 1, 50))),
+    subtitle: Text(entry.content.substring(0, min(entry.content.length, 50))),
     onTap: () {
       Navigator.push(
         context,
@@ -41,9 +48,4 @@ Widget _buildRow(context, Entry entry) {
       );
     },
   );
-}
-
-class FirstRoute extends StatefulWidget {
-  @override
-  FirstRouteState createState() => FirstRouteState();
 }

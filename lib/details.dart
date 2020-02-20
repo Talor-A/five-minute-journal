@@ -1,5 +1,9 @@
-import 'data/Entry.dart';
+import 'package:provider/provider.dart';
+
+import 'data/entry.dart';
 import 'package:flutter/material.dart';
+
+import 'data/user.dart';
 
 class DetailsState extends State {
   final Entry entry;
@@ -15,6 +19,7 @@ class DetailsState extends State {
 
   @override
   void dispose() {
+    this.entry.update();
     _controller.dispose();
     super.dispose();
   }
