@@ -5,6 +5,96 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import 'package:provider/provider.dart';
+
+import 'model/entry.dart';
+import 'model/user.dart';
+
+class EntryEvent implements EventInterface {
+  final Widget dot;
+  final Entry entry;
+  final Widget icon;
+
+  EntryEvent({this.entry, this.dot, this.icon});
+
+  @override
+  DateTime getDate() {
+    return entry.getCalendarDate();
+  }
+
+  @override
+  Widget getDot() {
+    return this.dot;
+  }
+
+  @override
+  Widget getIcon() {
+    return this.icon;
+  }
+
+  @override
+  String getTitle() {
+    return entry.date();
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    User user = Provider.of<User>(context);
+
+    return StreamProvider<List<Entry>>(
+      create: (context) => user.getEntries(),
+      child: MyCal(),
+    );
+  }
+}
+
+class MyCal extends StatelessWidget {
+  static Widget _eventIcon = new Container(
+    decoration: new BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(1000)),
+        border: Border.all(color: Colors.blue, width: 2.0)),
+    child: new Icon(
+      Icons.person,
+      color: Colors.amber,
+    ),
+  );
+  static Widget _eventDot = Container(
+    margin: EdgeInsets.symmetric(horizontal: 1.0),
+    color: Colors.green,
+    height: 5.0,
+    width: 5.0,
+  );
+  @override
+  Widget build(BuildContext context) {
+    var entries = Provider.of<List<Entry>>(context);
+    if (entries == null) return Text('loading..');
+    Map<DateTime, List<EntryEvent>> events = {};
+
+    entries
+        .map((entry) => EntryEvent(
+              entry: entry,
+              icon: _eventIcon,
+              dot: _eventDot,
+            ))
+        .forEach((event) {
+      events[event.getDate()] = [event];
+    });
+    print('events: ${events.length}');
+
+    var eventsList = EventList<EntryEvent>(events: events);
+
+    return CalendarCarousel<EntryEvent>(
+      markedDatesMap: eventsList,
+      onDayPressed: (DateTime date, List<EntryEvent> events) {
+        print('events on day: ${events.length}');
+        events.forEach((event) => print(event.entry.date()));
+      },
+    );
+  }
+}
 
 class CalendarPage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -50,16 +140,6 @@ class _CalendarPageState extends State<CalendarPage> {
             height: 5.0,
             width: 5.0,
           ),
-        ),
-        new Event(
-          date: new DateTime(2019, 2, 10),
-          title: 'Event 2',
-          icon: _eventIcon,
-        ),
-        new Event(
-          date: new DateTime(2019, 2, 10),
-          title: 'Event 3',
-          icon: _eventIcon,
         ),
       ],
     },
@@ -183,63 +263,56 @@ class _CalendarPageState extends State<CalendarPage> {
       },
     );
 
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('cal'),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+    return SingleChildScrollView(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.only(
+            top: 30.0,
+            bottom: 16.0,
+            left: 16.0,
+            right: 16.0,
+          ),
+          child: new Row(
             children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(
-                  top: 30.0,
-                  bottom: 16.0,
-                  left: 16.0,
-                  right: 16.0,
+              Expanded(
+                  child: Text(
+                _currentMonth,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24.0,
                 ),
-                child: new Row(
-                  children: <Widget>[
-                    Expanded(
-                        child: Text(
-                      _currentMonth,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.0,
-                      ),
-                    )),
-                    FlatButton(
-                      child: Text('PREV'),
-                      onPressed: () {
-                        setState(() {
-                          _targetDateTime = DateTime(
-                              _targetDateTime.year, _targetDateTime.month - 1);
-                          _currentMonth =
-                              DateFormat.yMMM().format(_targetDateTime);
-                        });
-                      },
-                    ),
-                    FlatButton(
-                      child: Text('NEXT'),
-                      onPressed: () {
-                        setState(() {
-                          _targetDateTime = DateTime(
-                              _targetDateTime.year, _targetDateTime.month + 1);
-                          _currentMonth =
-                              DateFormat.yMMM().format(_targetDateTime);
-                        });
-                      },
-                    )
-                  ],
-                ),
+              )),
+              FlatButton(
+                child: Text('PREV'),
+                onPressed: () {
+                  setState(() {
+                    _targetDateTime = DateTime(
+                        _targetDateTime.year, _targetDateTime.month - 1);
+                    _currentMonth = DateFormat.yMMM().format(_targetDateTime);
+                  });
+                },
               ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.0),
-                child: _calendarCarouselNoHeader,
-              ), //
+              FlatButton(
+                child: Text('NEXT'),
+                onPressed: () {
+                  setState(() {
+                    _targetDateTime = DateTime(
+                        _targetDateTime.year, _targetDateTime.month + 1);
+                    _currentMonth = DateFormat.yMMM().format(_targetDateTime);
+                  });
+                },
+              )
             ],
           ),
-        ));
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.0),
+          child: _calendarCarouselNoHeader,
+        ), //
+      ],
+    ));
   }
 }

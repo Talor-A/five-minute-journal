@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_day_1/message_list.dart';
+import 'package:flutter_day_1/model/user.dart';
 import 'package:provider/provider.dart';
-
-import 'data/user.dart';
 
 class AppInfo extends StatelessWidget {
   @override

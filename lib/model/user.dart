@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_day_1/data/entry.dart';
+import 'entry.dart';
 
 class User {
   String id;

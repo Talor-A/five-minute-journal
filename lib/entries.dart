@@ -1,9 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_day_1/data/entry.dart';
-import 'package:flutter_day_1/data/user.dart';
-import 'package:flutter_day_1/widget/test.dart';
+import 'package:flutter_day_1/model/entry.dart';
+import 'package:flutter_day_1/model/user.dart';
 import 'package:provider/provider.dart';
 
 import 'details.dart';
@@ -25,13 +24,13 @@ class EntriesList extends StatelessWidget {
   Widget build(BuildContext context) {
     var entries = Provider.of<List<Entry>>(context);
 
-    return Scaffold(
-      body: ListView.builder(
-          itemCount: entries.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _buildRow(context, entries[index]);
-          }),
-    );
+    if (entries == null) return Text('loading...');
+
+    return ListView.builder(
+        itemCount: entries.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _buildRow(context, entries[index]);
+        });
   }
 }
 

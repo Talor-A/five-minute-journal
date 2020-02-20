@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_day_1/model/message.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
-import 'data/message.dart';
 
 class MessageList extends StatelessWidget {
   Widget build(BuildContext context) {

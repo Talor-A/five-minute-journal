@@ -1,9 +1,5 @@
-import 'package:provider/provider.dart';
-
-import 'data/entry.dart';
 import 'package:flutter/material.dart';
-
-import 'data/user.dart';
+import 'package:flutter_day_1/model/entry.dart';
 
 class DetailsState extends State {
   final Entry entry;

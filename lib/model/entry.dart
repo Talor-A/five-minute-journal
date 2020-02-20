@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_day_1/data/user.dart';
+import 'package:flutter_day_1/model/user.dart';
 import 'package:intl/intl.dart';
 
 import 'Todo.dart';
@@ -12,7 +11,13 @@ class Entry {
   List<String> notes;
   List<Todo> todos;
 
-  DateTime creationDate;
+  DateTime _date;
+
+  set creationDate(DateTime date) {
+    this._date = DateTime(date.year, date.month, date.day);
+  }
+
+  get creationDate => _date;
 
   Entry({content, creationDate, this.id}) {
     this.creationDate = DateTime.now();
@@ -78,6 +83,14 @@ class Entry {
 
   String date() {
     return DateFormat("MMMd").format(creationDate);
+  }
+
+  DateTime getCalendarDate() {
+    return DateTime(
+      creationDate.year,
+      creationDate.month,
+      creationDate.day,
+    );
   }
 
   String time() {
