@@ -11,19 +11,21 @@ class TabNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.list)),
               Tab(icon: Icon(Icons.calendar_today)),
+              Tab(icon: Icon(Icons.info)),
             ],
           ),
         ),
         body: TabBarView(children: [
           FirstRoute(),
           SecondRoute(),
+          AppInfo(),
         ]),
       ),
     );
