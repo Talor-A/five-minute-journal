@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_day_1/app_info.dart';
-import 'package:flutter_day_1/entries.dart';
+import 'package:june_lake/app_info.dart';
+import 'package:june_lake/entries.dart';
 import 'package:provider/provider.dart';
 
 import '../calendar.dart';

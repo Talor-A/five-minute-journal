@@ -8,7 +8,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_test/flutter_test.dart';
 
-// import 'package:flutter_day_1/boot/my_app.dart';
+// import 'package:june_lake/boot/my_app.dart';
 
 // void main() {
 //   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

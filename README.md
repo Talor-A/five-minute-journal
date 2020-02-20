@@ -1,4 +1,4 @@
-# flutter_day_1
+# Personal Journal App
 
 A new Flutter project.
 

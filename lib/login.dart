@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_day_1/utils/bubble_indication_painter.dart';
-import 'package:flutter_day_1/style/theme.dart' as Theme;
+import 'package:june_lake/utils/bubble_indication_painter.dart';
+import 'package:june_lake/style/theme.dart' as Theme;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);

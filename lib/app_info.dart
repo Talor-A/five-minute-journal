@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_day_1/model/user.dart';
+import 'package:june_lake/model/user.dart';
 import 'package:provider/provider.dart';
 
 class AppInfo extends StatelessWidget {

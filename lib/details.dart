@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_day_1/model/entry.dart';
+import 'package:june_lake/model/entry.dart';
 
 class DetailsState extends State {
   final Entry entry;

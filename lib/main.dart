@@ -7,7 +7,7 @@ import 'boot/app_provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final FirebaseApp app = await FirebaseApp.configure(
-    name: 'flutter_day_1',
+    name: 'june_lake',
     options: const FirebaseOptions(
       googleAppID: '1:136511537243:ios:1a30cc973b60e3aeceff7e',
       // gcmSenderID: '79601577497',

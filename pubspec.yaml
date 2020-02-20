@@ -1,5 +1,5 @@
-name: flutter_day_1
-description: A new Flutter project.
+name: june_lake
+description: Personal Journal Companion by Talor Anderson
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -29,6 +29,7 @@ dependencies:
   provider:
   intl:
   flutter_calendar_carousel:
+  rxdart:
 
 dev_dependencies:
   flutter_test:

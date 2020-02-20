@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_day_1/model/user.dart';
+import 'package:june_lake/model/user.dart';
 import 'package:intl/intl.dart';
 
 import 'Todo.dart';

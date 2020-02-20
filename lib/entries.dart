@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_day_1/model/entry.dart';
-import 'package:flutter_day_1/model/user.dart';
+import 'package:june_lake/model/entry.dart';
+import 'package:june_lake/model/user.dart';
 import 'package:provider/provider.dart';
 
 import 'details.dart';
