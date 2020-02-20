@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_day_1/app_info.dart';
+import 'package:flutter_day_1/data/message.dart';
 import 'package:flutter_day_1/login.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'entries.dart';
+import 'data/entry.dart';
+import 'data/message.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +34,12 @@ class AppProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Stream<List<Message>> streamMessages() {
+      var ref = Firestore.instance.collection(Message.collection);
+      return ref.snapshots().map((list) =>
+          list.documents.map((doc) => Message.fromSnapshot(doc)).toList());
+    }
+
     return MultiProvider(
       providers: [
         // Make user stream available
@@ -39,11 +47,15 @@ class AppProvider extends StatelessWidget {
             value: FirebaseAuth.instance.onAuthStateChanged),
 
         // See implementation details in next sections
-        StreamProvider<QuerySnapshot>.value(
-          value: firestore
+        StreamProvider<QuerySnapshot>(
+          create: (_) => firestore
               .collection("messages")
               .orderBy("created_at", descending: true)
               .snapshots(),
+        ),
+        StreamProvider<List<Message>>(
+          create: (_) => streamMessages(),
+          initialData: [],
         ),
       ],
 

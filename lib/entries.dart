@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_day_1/data/Entry.dart';
 import 'package:flutter_day_1/widget/test.dart';
@@ -5,11 +7,11 @@ import 'package:flutter_day_1/widget/test.dart';
 import 'details.dart';
 
 class FirstRouteState extends State<FirstRoute> {
-  var entries = List<Entry>.generate(7, createEntry);
+  var entries = List<Entry>();
 
   void routeCreateEntry(title, content) {
     setState(() {
-      entries.add(new Entry(title: title, content: content));
+      entries.add(new Entry(content: content));
     });
   }
 
@@ -27,8 +29,9 @@ class FirstRouteState extends State<FirstRoute> {
 
 Widget _buildRow(context, Entry entry) {
   return ListTile(
-    title: Text(entry.title),
-    subtitle: Text(entry.getDateString()),
+    title: Text(entry.date()),
+    subtitle:
+        Text(entry.content.substring(0, min(entry.content.length - 1, 50))),
     onTap: () {
       Navigator.push(
         context,

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_day_1/message_list.dart';
 import 'package:provider/provider.dart';
 
 class AppInfo extends StatelessWidget {
@@ -18,27 +19,13 @@ class AppInfo extends StatelessWidget {
 
     QuerySnapshot messages = Provider.of<QuerySnapshot>(context);
 
-    var loggedIn = user != null;
-
-    // if (!loggedIn) login();
+    assert(user != null);
 
     return Scaffold(
       appBar: AppBar(
         title: Text('App Info'),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('hello, ${user.displayName}!'),
-            Text('messages: ${messages.documents.length}'),
-            FlatButton(
-              child: Text('logout'),
-              onPressed: () => FirebaseAuth.instance.signOut(),
-            )
-          ],
-        ),
-      ),
+      body: MessageList(),
     );
   }
 }

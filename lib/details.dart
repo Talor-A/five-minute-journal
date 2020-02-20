@@ -35,7 +35,7 @@ class DetailsState extends State {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(entry.title),
+        title: Text(entry.date()),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
