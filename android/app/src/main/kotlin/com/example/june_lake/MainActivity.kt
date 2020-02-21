@@ -1,4 +1,4 @@
-package com.example.flutter_day_1
+package com.example.june_lake
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
