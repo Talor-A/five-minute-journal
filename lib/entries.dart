@@ -10,11 +10,19 @@ import 'details.dart';
 class FirstRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<User>(context);
-
-    return StreamProvider<List<Entry>>(
-      create: (context) => user.getEntries(),
-      child: EntriesList(),
+    return Scaffold(
+      body: EntriesList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  Details(entry: Entry(creationDate: DateTime.now())),
+            ),
+          );
+        },
+      ),
     );
   }
 }

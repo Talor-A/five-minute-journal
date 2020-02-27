@@ -1,7 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:june_lake/api/auth.dart';
 import 'package:june_lake/app_info.dart';
+import 'package:june_lake/details.dart';
 import 'package:june_lake/entries.dart';
+import 'package:june_lake/model/entry.dart';
+import 'package:june_lake/model/user.dart';
+import 'package:june_lake/provider/entry_provider.dart';
+import 'package:june_lake/style/theme.dart' as MyTheme;
 import 'package:provider/provider.dart';
 
 import '../calendar.dart';
@@ -22,11 +28,14 @@ class TabNavigator extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(children: [
-          FirstRoute(),
-          SecondRoute(),
-          AppInfo(),
-        ]),
+        body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            FirstRoute(),
+            SecondRoute(),
+            AppInfo(),
+          ],
+        ),
       ),
     );
   }
@@ -34,11 +43,13 @@ class TabNavigator extends StatelessWidget {
 
 class MyApp extends StatelessWidget {
   Widget _getFirstRoute(BuildContext context) {
-    var user = Provider.of<FirebaseUser>(context);
+    var state = Provider.of<AuthState>(context);
 
-    if (user == null) return LoginPage();
+    if (state is LoggedIn) return EntryProvider(child: TabNavigator());
 
-    return TabNavigator();
+    if (state is LoggedOut) return LoginPage();
+
+    return Container(color: MyTheme.Colors.loginGradientEnd);
   }
 
   @override

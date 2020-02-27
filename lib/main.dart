@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'boot/app_provider.dart';
+import 'package:june_lake/provider/auth_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,5 +16,5 @@ Future<void> main() async {
   );
   final Firestore firestore = Firestore(app: app);
 
-  runApp(AppProvider());
+  runApp(AuthProvider());
 }

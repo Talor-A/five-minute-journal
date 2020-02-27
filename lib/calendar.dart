@@ -41,12 +41,7 @@ class EntryEvent implements EventInterface {
 class SecondRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<User>(context);
-
-    return StreamProvider<List<Entry>>(
-      create: (context) => user.getEntries(),
-      child: MyCal(),
-    );
+    return MyCal();
   }
 }
 

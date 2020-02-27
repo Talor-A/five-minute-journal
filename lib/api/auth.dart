@@ -1,68 +1,72 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:june_lake/model/user.dart';
 import 'package:rxdart/rxdart.dart';
 
+abstract class AuthState {
+  get user;
+}
+
+class LoggedIn extends AuthState {
+  User user;
+
+  LoggedIn(this.user);
+}
+
+class LoggedOut extends AuthState {
+  get user => null;
+}
+
+class Loading extends AuthState {
+  get user => null;
+}
+
 class AuthService {
-  // Dependencies
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final Firestore _db = Firestore.instance;
+  final FirebaseAuth _firebaseAuth;
+  BehaviorSubject<AuthState> status;
 
-  // Shared State for Widgets
-  Stream<FirebaseUser> user; // firebase user
-  Stream<Map<String, dynamic>> profile; // custom user data in Firestore
-  PublishSubject loading = PublishSubject();
+  AuthService(this._firebaseAuth) {
+    status = BehaviorSubject<AuthState>.seeded(Loading());
 
-  // constructor
-  AuthService() {
-    user = _auth.onAuthStateChanged;
-
-    profile = user.switchMap((FirebaseUser u) {
-      if (u != null) {
-        return _db
-            .collection('users')
-            .document(u.uid)
-            .snapshots()
-            .map((snap) => snap.data);
-      } else {
-        return Stream.value({});
-      }
-    });
+    listen();
   }
-  Future<FirebaseUser> signIn(String email, String password) async {
-    // Start
-    loading.add(true);
+  listen() async {
+    await for (FirebaseUser u in _firebaseAuth.onAuthStateChanged) {
+      if (u != null) {
+        DocumentSnapshot snap =
+            await Firestore.instance.collection('users').document(u.uid).get();
+        User user = User.fromFirestore(snap);
+        print(user);
+        status.add(LoggedIn(user));
+      } else {
+        status.add(LoggedOut());
+      }
+    }
+  }
 
-    // Step 1
-    var res = await _auth.signInWithEmailAndPassword(
+  Future<AuthResult> signIn(String email, String password) {
+    return _firebaseAuth.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
-    FirebaseUser user = res.user;
-
-    // Step 3
-    updateUserData(user);
-
-    // Done
-    loading.add(false);
-    print("signed in " + user.displayName);
-    return user;
   }
 
-  void updateUserData(FirebaseUser user) async {
-    DocumentReference ref = _db.collection('users').document(user.uid);
-
-    return ref.setData({
-      'uid': user.uid,
-      'email': user.email,
-      'photoURL': user.photoUrl,
-      'displayName': user.displayName,
-      'lastSeen': DateTime.now()
-    }, merge: true);
+  Future<AuthResult> signUp({String email, String password}) async {
+    return await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
-  void signOut() {
-    _auth.signOut();
+  Future<void> signOut() async {
+    return _firebaseAuth.signOut();
   }
+
+  bool isSignedIn() {
+    return this.status.value is LoggedIn;
+  }
+
+  User getCurrentUser() => this.status.value.user;
 }
 
-final AuthService auth = AuthService();
+final AuthService auth = AuthService(FirebaseAuth.instance);

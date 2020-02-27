@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:june_lake/api/auth.dart';
 import 'package:june_lake/utils/bubble_indication_painter.dart';
 import 'package:june_lake/style/theme.dart' as Theme;
 
@@ -518,8 +519,7 @@ class _LoginPageState extends State<LoginPage>
 
     print('Creating user for $name with $email:$password');
     try {
-      AuthResult res =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      AuthResult res = await auth.signUp(
         email: email,
         password: password,
       );
@@ -551,12 +551,14 @@ class _LoginPageState extends State<LoginPage>
   void _doLogin() async {
     String email = loginEmailController.value.text;
     String password = loginPasswordController.value.text;
+
+    if (email.length == 0 || password.length == 0) {
+      showInSnackBar("make sure you fill in all the fields first!");
+      return;
+    }
     print('logging in as $email:$password');
     try {
-      AuthResult res = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      AuthResult res = await auth.signIn(email, password);
     } catch (err) {
       assert(err is PlatformException);
 

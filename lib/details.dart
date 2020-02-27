@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:june_lake/api/entry_service.dart';
 import 'package:june_lake/model/entry.dart';
 
 class DetailsState extends State {
@@ -15,7 +16,7 @@ class DetailsState extends State {
 
   @override
   void dispose() {
-    this.entry.update();
+    entryService.update(entry);
     _controller.dispose();
     super.dispose();
   }

@@ -8,8 +8,7 @@ class AppInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     User user = Provider.of<User>(context);
 
-    var text = (user == null) ? 'no user' : user.id;
-    var existst = (user == null) ? 'no user' : 'data: ${user.data}';
+    var text = (user == null) ? 'no user' : 'hi ${user.name}!';
 
     return Scaffold(
       appBar: AppBar(
@@ -19,7 +18,6 @@ class AppInfo extends StatelessWidget {
           child: Column(
         children: <Widget>[
           Text(text),
-          Text(existst),
           MaterialButton(
             onPressed: FirebaseAuth.instance.signOut,
             child: Text('Log Out'),

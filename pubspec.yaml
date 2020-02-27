@@ -30,6 +30,8 @@ dependencies:
   intl:
   flutter_calendar_carousel:
   rxdart:
+  carousel_slider: ^1.3.0
+  bloc:
 
 dev_dependencies:
   flutter_test:

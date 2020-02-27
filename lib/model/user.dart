@@ -1,39 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'entry.dart';
 
 class User {
-  String id;
-  DocumentReference doc;
-  DocumentSnapshot snap;
-  String data;
+  String uid;
+  String name;
+  String email;
 
-  static Stream<User> getById(String userID) {
-    print('getting for user $userID');
-    var doc = Firestore.instance.collection('users').document(userID);
-    var stream = doc.snapshots();
+  User({this.uid, this.name, this.email});
 
-    return stream.asyncMap((DocumentSnapshot snap) async {
-      User user = User();
-      user.id = snap.documentID;
-      if (!snap.exists) {
-        doc.setData(
-            {'name': (await FirebaseAuth.instance.currentUser()).displayName});
-      }
-      user.snap = snap;
-      user.doc = doc;
-      user.data = snap.data.toString();
-      return user;
-    });
+  factory User.fromFirestore(DocumentSnapshot doc) {
+    Map data = doc.data;
+    return User(
+      uid: doc.documentID,
+      name: data['name'],
+      email: data['email'],
+    );
+    // username: data['username'],
+    // age: data['age'],
+    // photoUrl: data['photoUrl']);
   }
+  // factory User.fromMap(Map data) {
+  //   return User(
+  //       uid: data['uid'],
+  //       name: data['name'],
+  //       username: data['username'],
+  //       age: data['age'],
+  //       photoUrl: data['photoUrl']);
+  // }
 
-  Stream<List<Entry>> getEntries() {
-    return doc.collection('entries').snapshots().map((list) =>
-        list.documents.map((doc) => Entry.fromSnapshot(doc)).toList());
-  }
-
-  static Stream<User> get(FirebaseUser authUser) {
-    if (authUser == null) return null;
-    return getById(authUser.uid);
+  get entriesPath => 'users/$uid/entries/';
+  @override
+  String toString() {
+    return '{ name: $name, email: $email, uid: $uid }';
   }
 }
