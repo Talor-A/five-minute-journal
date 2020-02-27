@@ -202,6 +202,7 @@ class _LoginPageState extends State<LoginPage>
   }
 
   void showInSnackBar(String value) {
+    print(value);
     FocusScope.of(context).requestFocus(new FocusNode());
     _scaffoldKey.currentState?.removeCurrentSnackBar();
     _scaffoldKey.currentState.showSnackBar(new SnackBar(
@@ -556,7 +557,7 @@ class _LoginPageState extends State<LoginPage>
       showInSnackBar("make sure you fill in all the fields first!");
       return;
     }
-    print('logging in as $email:$password');
+    print('logging in as $email');
     try {
       AuthResult res = await auth.signIn(email, password);
     } catch (err) {

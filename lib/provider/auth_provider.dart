@@ -1,11 +1,6 @@
-import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:june_lake/api/auth.dart';
-import 'package:june_lake/boot/my_app.dart';
-import 'package:june_lake/model/user.dart';
+import 'package:june_lake/pages/my_app.dart';
 import 'package:provider/provider.dart';
 
 class AuthProvider extends StatelessWidget {

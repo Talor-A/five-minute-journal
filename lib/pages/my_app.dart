@@ -1,17 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:june_lake/api/auth.dart';
-import 'package:june_lake/app_info.dart';
-import 'package:june_lake/details.dart';
-import 'package:june_lake/entries.dart';
-import 'package:june_lake/model/entry.dart';
-import 'package:june_lake/model/user.dart';
+import 'package:june_lake/pages/app_info.dart';
+import 'package:june_lake/pages/calendar.dart';
+import 'package:june_lake/pages/entries.dart';
+import 'package:june_lake/pages/login.dart';
 import 'package:june_lake/provider/entry_provider.dart';
 import 'package:june_lake/style/theme.dart' as MyTheme;
 import 'package:provider/provider.dart';
-
-import '../calendar.dart';
-import '../login.dart';
 
 class TabNavigator extends StatelessWidget {
   @override

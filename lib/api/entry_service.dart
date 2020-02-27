@@ -17,11 +17,15 @@ class EntryService {
   void update(Entry e) async {
     if (!e.existsInDb) {
       var ref = getCurrentUserEntries().document();
-      ref.setData(e.toMap());
       e.existsInDb = true;
       e.id = ref.documentID;
+      return ref.setData(e.toMap());
     }
-    getCurrentUserEntries().document(e.id).updateData(e.toMap());
+    return getCurrentUserEntries().document(e.id).updateData(e.toMap());
+  }
+
+  void delete(Entry e) async {
+    return getCurrentUserEntries().document(e.id).delete();
   }
 
   CollectionReference getCurrentUserEntries() {

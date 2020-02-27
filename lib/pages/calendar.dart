@@ -5,10 +5,8 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import 'package:june_lake/model/entry.dart';
 import 'package:provider/provider.dart';
-
-import 'model/entry.dart';
-import 'model/user.dart';
 
 class EntryEvent implements EventInterface {
   final Widget dot;
