@@ -64,7 +64,7 @@ class MyCal extends StatelessWidget {
   Widget build(BuildContext context) {
     var entries = Provider.of<List<Entry>>(context);
     if (entries == null) return Text('loading..');
-    Map<DateTime, List<EntryEvent>> events = {};
+    Map<DateTime, EntryEvent> events = {};
 
     entries
         .map((entry) => EntryEvent(
@@ -73,11 +73,12 @@ class MyCal extends StatelessWidget {
               dot: _eventDot,
             ))
         .forEach((event) {
-      events[event.getDate()] = [event];
+      events[event.getDate()] = event;
     });
     print('events: ${events.length}');
 
-    var eventsList = EventList<EntryEvent>(events: events);
+    var eventsList = EventList<EntryEvent>(
+        events: events.map((dateTime, event) => MapEntry(dateTime, [event])));
 
     return CalendarCarousel<EntryEvent>(
       markedDatesMap: eventsList,

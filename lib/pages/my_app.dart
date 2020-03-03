@@ -4,6 +4,7 @@ import 'package:june_lake/pages/app_info.dart';
 import 'package:june_lake/pages/calendar.dart';
 import 'package:june_lake/pages/entries.dart';
 import 'package:june_lake/pages/login.dart';
+import 'package:june_lake/pages/swiper.dart';
 import 'package:june_lake/provider/entry_provider.dart';
 import 'package:june_lake/style/theme.dart' as MyTheme;
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class TabNavigator extends StatelessWidget {
         body: TabBarView(
           physics: NeverScrollableScrollPhysics(),
           children: [
-            FirstRoute(),
+            Swiper(),
             SecondRoute(),
             AppInfo(),
           ],

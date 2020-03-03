@@ -59,7 +59,7 @@ class Entry {
     this._date = DateTime(date.year, date.month, date.day);
   }
 
-  get creationDate => _date;
+  DateTime get creationDate => _date;
 
   String date() => DateFormat("MMMd").format(creationDate);
 

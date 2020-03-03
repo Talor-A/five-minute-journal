@@ -10,11 +10,14 @@ class EntryProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // provide streams to the app to watch
-
-    return StreamProvider<List<Entry>>.value(
-      value: entryService.getEntries(),
+    return MultiProvider(
+      providers: [
+        StreamProvider<List<Entry>>.value(
+          value: entryService.asList(),
+          lazy: true,
+        ),
+      ],
       child: child,
-      lazy: true,
     );
   }
 }

@@ -9,7 +9,7 @@ class EntryService {
 
   EntryService(this._db);
 
-  Stream<List<Entry>> getEntries() {
+  Stream<List<Entry>> asList() {
     return getCurrentUserEntries().snapshots().map((list) =>
         list.documents.map((doc) => Entry.fromFirebase(doc)).toList());
   }
