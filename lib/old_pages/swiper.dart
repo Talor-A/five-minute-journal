@@ -1,7 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:june_lake/model/entry.dart';
 import 'package:provider/provider.dart';
+
+import 'entry.dart';
 
 class Swiper extends StatelessWidget {
   Widget _builder(BuildContext context, int index) {

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:june_lake/model/entry.dart';
+import 'entry.dart';
 import 'package:provider/provider.dart';
 
 import 'details.dart';

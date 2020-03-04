@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-import 'package:june_lake/model/entry.dart';
+import 'entry.dart';
 import 'package:june_lake/api/auth.dart';
 import 'package:june_lake/model/user.dart';
 

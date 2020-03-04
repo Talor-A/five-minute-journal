@@ -49,7 +49,6 @@ class Logs extends StatelessWidget {
 }
 
 Widget _buildRow(context, Log log) {
-  print('built row $log');
   Widget tile;
 
   if (Todo.isTodo(log)) {

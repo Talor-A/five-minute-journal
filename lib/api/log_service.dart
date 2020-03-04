@@ -11,19 +11,7 @@ class LogService {
     return getUserLogs()
         .orderBy('created_at')
         .snapshots()
-        .map((list) => list.documents.map((doc) => createLog(doc)).toList());
-  }
-
-  Log createLog(DocumentSnapshot snap) {
-    switch (snap.data['type']) {
-      // case 'todo':
-      //   return Todo.fromSnap(snap);
-      // case 'text':
-      //   return TextEntry.fromSnap(snap);
-      default:
-        print('default log constructor called!');
-        return Log.fromSnap(snap);
-    }
+        .map((list) => list.documents.map((doc) => Log.fromSnap(doc)).toList());
   }
 
   Future<void> update(Log e) async {

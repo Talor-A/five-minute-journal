@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:june_lake/api/auth.dart';
 import 'package:june_lake/pages/login.dart';
 import 'package:june_lake/pages/tabs.dart';
-import 'package:june_lake/provider/entry_provider.dart';
 import 'package:june_lake/provider/log_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -24,8 +23,7 @@ class MyApp extends StatelessWidget {
   Widget _getFirstRoute(BuildContext context) {
     var state = Provider.of<AuthState>(context);
 
-    if (state is LoggedIn)
-      return LogProvider(child: EntryProvider(child: TabNavigator()));
+    if (state is LoggedIn) return LogProvider(child: TabNavigator());
 
     if (state is LoggedOut) return LoginPage();
 

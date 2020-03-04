@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:june_lake/api/entry_service.dart';
-import 'package:june_lake/model/entry.dart';
+import 'entry_service.dart';
+import 'entry.dart';
 
 class DetailsState extends State {
   final Entry entry;

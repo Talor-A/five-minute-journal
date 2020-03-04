@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:june_lake/api/entry_service.dart';
-import 'package:june_lake/model/entry.dart';
 import 'package:provider/provider.dart';
+
+import 'entry.dart';
+import 'entry_service.dart';
 
 class EntryProvider extends StatelessWidget {
   final Widget child;
