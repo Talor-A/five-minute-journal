@@ -4,7 +4,7 @@ import 'package:june_lake/model/log.dart';
 import 'package:june_lake/model/todo.dart';
 import 'package:provider/provider.dart';
 
-class Journal extends StatelessWidget {
+class Agenda extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,20 +33,23 @@ class Logs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var entries = Provider.of<List<Log>>(context);
+    entries = entries.toList();
+    entries.retainWhere((Log test) {
+      return test.type == 'todo';
+    });
 
     if (entries == null) return Text('loading...');
 
     return ListView.builder(
         itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
-          return _buildRow(context, index);
+          return _buildRow(context, entries[index]);
         });
   }
 }
 
-Widget _buildRow(context, int index) {
-  var entries = Provider.of<List<Log>>(context);
-  Log log = entries[index];
+Widget _buildRow(context, Log log) {
+  print('built row $log');
   Widget tile;
 
   if (Todo.isTodo(log)) {
@@ -67,21 +70,21 @@ Widget _buildRow(context, int index) {
     );
   }
 
-  if (index == 0 || log.dateString != entries[index - 1].dateString) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          child: Text(
-            log.dateString,
-            style: TextStyle(color: Theme.of(context).primaryColor),
-          ),
-          padding: EdgeInsets.only(left: 16),
-        ),
-        tile,
-      ],
-    );
-  }
+  // if (index == 0 || log.dateString != entries[index - 1].dateString) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Container(
+  //         child: Text(
+  //           log.dateString,
+  //           style: TextStyle(color: Theme.of(context).primaryColor),
+  //         ),
+  //         padding: EdgeInsets.only(left: 16),
+  //       ),
+  //       tile,
+  //     ],
+  //   );
+  // }
 
   return tile;
 }

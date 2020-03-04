@@ -4,7 +4,7 @@ import 'package:june_lake/api/auth.dart';
 import 'package:june_lake/model/user.dart';
 import 'package:provider/provider.dart';
 
-class AppInfo extends StatelessWidget {
+class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<AuthState>(context).user;
