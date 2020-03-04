@@ -103,6 +103,7 @@ class _LoginPageState extends State<LoginPage>
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overscroll) {
           overscroll.disallowGlow();
+          return true;
         },
         child: SingleChildScrollView(
           child: Container(
@@ -560,6 +561,7 @@ class _LoginPageState extends State<LoginPage>
     print('logging in as $email');
     try {
       AuthResult res = await auth.signIn(email, password);
+      print(res.additionalUserInfo);
     } catch (err) {
       assert(err is PlatformException);
 

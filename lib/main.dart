@@ -14,7 +14,7 @@ Future<void> main() async {
       projectID: 'cs-4990-mobile-dev-project',
     ),
   );
-  final Firestore firestore = Firestore(app: app);
+  Firestore(app: app);
 
   runApp(AuthProvider());
 }
