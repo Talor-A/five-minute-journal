@@ -1,34 +1,40 @@
-enum TodoStatus {
-  complete,
-  incomplete,
-  discarded,
-}
+import 'log.dart';
 
-class Todo {
-  String text;
-  TodoStatus status;
+abstract class Todo {
+  static isTodo(Log log) => log.type == 'todo';
 
-  discard() {
-    this.status = TodoStatus.discarded;
+  static discard(Log log) {
+    log.status = TodoStatus.discarded;
+    log.completedDate = null;
   }
 
-  checkOff() {
-    this.status = TodoStatus.complete;
+  static toggle(Log log) {
+    if (log.status == TodoStatus.complete) {
+      uncheck(log);
+    } else {
+      checkOff(log);
+    }
   }
 
-  uncheck() {
-    this.status = TodoStatus.incomplete;
+  static checkOff(Log log) {
+    log.status = TodoStatus.complete;
+    log.completedDate = DateTime.now();
   }
 
-  bool isComplete() {
-    return this.status == TodoStatus.complete;
+  static uncheck(Log log) {
+    log.status = TodoStatus.incomplete;
+    log.completedDate = null;
   }
 
-  bool isIncomplete() {
-    return this.status == TodoStatus.incomplete;
+  static bool isComplete(Log log) {
+    return log.status == TodoStatus.complete;
   }
 
-  bool isDiscarded() {
-    return this.status == TodoStatus.discarded;
+  static bool isIncomplete(Log log) {
+    return log.status == TodoStatus.incomplete;
+  }
+
+  static bool isDiscarded(Log log) {
+    return log.status == TodoStatus.discarded;
   }
 }

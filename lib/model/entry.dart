@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-import 'Todo.dart';
-
 class Entry {
   bool existsInDb;
   String id;
@@ -13,7 +11,6 @@ class Entry {
   DocumentSnapshot snap;
 
   List<String> notes;
-  List<Todo> todos;
 
   DateTime _date;
 
