@@ -6,7 +6,8 @@ class TodoItem extends StatelessWidget {
   final void Function() onTap;
   final Log log;
 
-  TodoItem(this.log, {this.onTap});
+  TodoItem(this.log, {Key key, this.onTap}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ListTile(

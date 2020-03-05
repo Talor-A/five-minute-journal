@@ -3,6 +3,7 @@ import 'package:june_lake/api/log_service.dart';
 import 'package:june_lake/model/log.dart';
 import 'package:june_lake/model/todo.dart';
 import 'package:june_lake/widgets/editor.dart';
+import 'package:june_lake/widgets/text_item.dart';
 import 'package:june_lake/widgets/todo_item.dart';
 import 'package:provider/provider.dart';
 
@@ -40,11 +41,7 @@ Widget _buildLogItem(Log log) {
       logService.update(log);
     });
   } else {
-    return ListTile(
-      leading: Text('–'),
-      title: Text(log.text),
-      onTap: () {},
-    );
+    return TextItem(log, onDeletePressed: () => logService.delete(log));
   }
 }
 
