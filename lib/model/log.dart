@@ -34,19 +34,23 @@ class Log {
 
   DocumentSnapshot snap;
   bool existsInDb = false;
+  bool deleted = false;
 
   Log({
     this.uid,
-    this.type,
+    type,
     this.text,
-    this.createdAt,
-    this.updatedAt,
+    createdAt,
+    updatedAt,
     this.dueDate,
     this.snap,
     this.status,
     existsInDb,
   }) {
     this.existsInDb = existsInDb ?? false;
+    this.createdAt = createdAt ?? DateTime.now();
+    this.updatedAt = updatedAt ?? DateTime.now();
+    this.type = type ?? 'text';
   }
 
   factory Log.fromSnap(DocumentSnapshot snap) {
@@ -79,6 +83,7 @@ class Log {
     map['created_at'] = Timestamp.fromDate(createdAt);
     map['text'] = text;
     map['type'] = type;
+    map['deleted'] = deleted;
     map['status'] = statusStrs[status];
     return map;
   }

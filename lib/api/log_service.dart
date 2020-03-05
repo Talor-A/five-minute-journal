@@ -30,9 +30,9 @@ class LogService {
         .collection('logs');
   }
 
-  void newLog(String text) {
-    // getUserLogs().add(data)
-    return;
+  Future<DocumentReference> newLog(String text) {
+    var log = Log(text: text);
+    return getUserLogs().add(log.toMap());
   }
 }
 
