@@ -3,6 +3,7 @@ import 'package:june_lake/api/auth.dart';
 import 'package:june_lake/pages/login.dart';
 import 'package:june_lake/pages/tabs.dart';
 import 'package:june_lake/provider/log_provider.dart';
+import 'package:june_lake/widgets/keyboard_dismisser.dart';
 import 'package:provider/provider.dart';
 
 var darkTheme = ThemeData(
@@ -32,10 +33,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Transition Demo',
-      home: _getFirstRoute(context),
-      theme: false ? darkTheme : lightTheme,
+    return KeyboardDismisser(
+      child: MaterialApp(
+        title: 'Transition Demo',
+        home: _getFirstRoute(context),
+        theme: false ? darkTheme : lightTheme,
+      ),
     );
   }
 }
