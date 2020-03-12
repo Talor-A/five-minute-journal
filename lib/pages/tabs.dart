@@ -1,64 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:june_lake/model/log.dart';
 import 'package:june_lake/pages/agenda.dart';
 import 'package:june_lake/pages/journal.dart';
+import 'package:provider/provider.dart';
 
 class TabNavigator extends StatelessWidget {
   final Function() onDrawerTap;
-
   final tabs = [
-    [
-      Tab(text: 'Journal'),
-      Journal(),
-    ],
-    [
-      Tab(text: 'Agenda'),
-      Agenda(),
-    ],
+    Journal(),
+    Agenda(),
   ];
 
   TabNavigator({Key key, this.onDrawerTap}) : super(key: key);
 
-  Decoration _roundedCornerDecoration(BuildContext context) {
-    return ShapeDecoration(
-        color: Theme.of(context).canvasColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(44.0)),
-        ));
-  }
-
   Widget _buildHeader(BuildContext context) {
+    var list = Provider.of<List<Log>>(context)?.toList();
+    list?.retainWhere(
+        (log) => log.type == "todo" && log.status == TodoStatus.incomplete);
+
+    int incompleteCount = list?.length ?? 0;
+
+    var agendaTitle =
+        incompleteCount == 0 ? 'Agenda' : 'Agenda ($incompleteCount)';
+    var titles = [
+      Tab(text: 'Journal'),
+      Tab(text: agendaTitle),
+    ];
+
     return PreferredSize(
       preferredSize: Size.fromHeight(56.0),
       child: Container(
         color: Theme.of(context).canvasColor,
-        child: Container(
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
-            // decoration: _roundedCornerDecoration(context),
-            child: Flex(
-              direction: Axis.horizontal,
-              children: [
-                Expanded(
-                  child: FlatButton(
-                    child: Icon(
-                      Icons.menu,
-                      color: Theme.of(context).disabledColor,
-                    ),
-                    onPressed: onDrawerTap,
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: TabBar(
-                    indicatorColor: Theme.of(context).accentColor,
-                    labelColor: Theme.of(context).accentColor,
-                    unselectedLabelColor: Theme.of(context).disabledColor,
-                    tabs: tabs.map((tab) => tab[0]).toList(),
-                  ),
-                )
-              ],
+        padding: EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
+        child: Flex(
+          direction: Axis.horizontal,
+          children: [
+            FlatButton(
+              child: Icon(
+                Icons.menu,
+                color: Theme.of(context).disabledColor,
+              ),
+              onPressed: onDrawerTap,
             ),
-          ),
+            Expanded(
+              flex: 1,
+              child: TabBar(
+                indicatorColor: Theme.of(context).accentColor,
+                labelColor: Theme.of(context).accentColor,
+                unselectedLabelColor: Theme.of(context).disabledColor,
+                tabs: titles,
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -73,7 +66,7 @@ class TabNavigator extends StatelessWidget {
         appBar: _buildHeader(context),
         body: TabBarView(
           // physics: NeverScrollableScrollPhysics(),
-          children: tabs.map((tab) => tab[1]).toList(),
+          children: tabs,
         ),
       ),
     );

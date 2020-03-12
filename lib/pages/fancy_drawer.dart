@@ -63,37 +63,34 @@ class _FancyDrawerState extends State<FancyDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Theme.of(context).canvasColor,
-      child: InnerDrawer(
-          key: _innerDrawerKey,
-          onTapClose: true,
-          offset: IDOffset.only(
-              top: _topBottom ? _verticalOffset : 0.0,
-              bottom: !_topBottom ? _verticalOffset : 0.0,
-              right: _horizontalOffset,
-              left: _horizontalOffset),
-          scale: IDOffset.horizontal(_scale),
-          borderRadius: _borderRadius,
-          duration: Duration(milliseconds: 11200),
-          swipe: _swipe,
-          proportionalChildArea: _proportionalChildArea,
-          //backgroundColor: Colors.red,
-          colorTransition: currentColor,
-          leftAnimationType: _animationType,
-          // rightAnimationType: _animationType,
-          leftChild: Material(
-            color: Theme.of(context).backgroundColor,
-            child: SafeArea(child: Profile()),
-          ),
-          scaffold: Container(
-            color: Theme.of(context).canvasColor,
-            child: SafeArea(
-              bottom: false,
-              child: TabNavigator(
-                  onDrawerTap: () => _innerDrawerKey.currentState.toggle()),
-            ),
-          )),
+    return InnerDrawer(
+      key: _innerDrawerKey,
+      onTapClose: true,
+      offset: IDOffset.only(
+          top: _topBottom ? _verticalOffset : 0.0,
+          bottom: !_topBottom ? _verticalOffset : 0.0,
+          right: _horizontalOffset,
+          left: _horizontalOffset),
+      scale: IDOffset.horizontal(_scale),
+      borderRadius: _borderRadius,
+      duration: Duration(milliseconds: 11200),
+      swipe: _swipe,
+      proportionalChildArea: _proportionalChildArea,
+      colorTransition: currentColor,
+      leftAnimationType: _animationType,
+      // rightAnimationType: _animationType,
+      leftChild: Material(
+        color: Theme.of(context).backgroundColor,
+        child: SafeArea(child: Profile()),
+      ),
+      scaffold: Container(
+        color: Theme.of(context).canvasColor,
+        child: SafeArea(
+          bottom: false,
+          child: TabNavigator(
+              onDrawerTap: () => _innerDrawerKey.currentState.toggle()),
+        ),
+      ),
     );
   }
 }

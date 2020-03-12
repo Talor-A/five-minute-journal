@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:june_lake/api/log_service.dart';
+import 'package:june_lake/widgets/chips.dart';
 
 class EditorState extends State {
   String content = '';
+  int selectedItem = 0;
+  final List<String> options = ["note", "todo"];
+
   TextEditingController _controller;
 
   EditorState();
@@ -20,7 +24,18 @@ class EditorState extends State {
   }
 
   void submit() {
-    logService.newLog(this.content);
+    switch (options[selectedItem]) {
+      case "note":
+        logService.newLog(content);
+        break;
+      case "todo":
+        logService.newTodo(content);
+        break;
+      default:
+        print("allow me to introduce myself. I am an error.");
+        break;
+    }
+
     //for some reason both of these are needed. probs a bug.
     _controller.clear();
     this.setText('');
@@ -43,17 +58,30 @@ class EditorState extends State {
     );
 
     return Container(
-      padding: EdgeInsets.only(left: 16),
-      child: Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(child: textf),
-          FlatButton(
-            color: this.content.length > 0
-                ? null
-                : Theme.of(context).disabledColor,
-            onPressed: this.content.length > 0 ? this.submit : null,
-            child: Icon(Icons.keyboard_arrow_up),
-          ),
+          Chips(selectedItem, options, (index) {
+            this.setState(() {
+              this.selectedItem = index;
+            });
+          }),
+          Container(
+            padding: EdgeInsets.only(left: 16),
+            child: Row(
+              children: [
+                Expanded(child: textf),
+                FlatButton(
+                  color: this.content.length > 0
+                      ? null
+                      : Theme.of(context).disabledColor,
+                  onPressed: this.content.length > 0 ? this.submit : null,
+                  child: Icon(Icons.keyboard_arrow_up),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

@@ -12,34 +12,38 @@ class Profile extends StatelessWidget {
 
     var text = (user == null) ? 'no user' : 'hi ${user.name}!';
 
-    return Flex(direction: Axis.horizontal, children: [
-      Expanded(
-        child: Container(
-          // color: Colors.red,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              ListTile(
-                title: Text(text),
-                onTap: () {},
-              ),
-              FlatButton(
-                onPressed: FirebaseAuth.instance.signOut,
-                child: Text('Log Out'),
-              ),
-              FlatButton(
-                // color: Theme.of(context).accentColor,
-                // textColor: Theme.of(context).accentTextTheme.button.color,
-                onPressed: () =>
+    return Theme(
+      // Find and extend the parent theme using "copyWith".
+      data: Theme.of(context).copyWith(
+        textTheme: ThemeData.dark().textTheme,
+        buttonTheme: ThemeData.dark().buttonTheme,
+      ),
+      child: Flex(direction: Axis.horizontal, children: [
+        Expanded(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ListTile(
+                  title: Text(text),
+                ),
+                FlatButton(
+                  child: Text('Log Out'),
+                  onPressed: FirebaseAuth.instance.signOut,
+                ),
+                FlatButton(
+                  child: Text('Switch Theme'),
+                  onPressed: () {
                     Provider.of<ThemeProvider>(context, listen: false)
-                        .switchTheme(),
-                child: Text('Switch Theme'),
-              ),
-            ],
+                        .switchTheme();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    ]);
+      ]),
+    );
   }
 }

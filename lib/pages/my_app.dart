@@ -5,7 +5,7 @@ import 'package:june_lake/pages/login.dart';
 import 'package:june_lake/pages/tabs.dart';
 import 'package:june_lake/provider/log_provider.dart';
 import 'package:june_lake/provider/theme_provider.dart';
-import 'package:june_lake/widgets/keyboard_dismisser.dart';
+import 'package:june_lake/provider/keyboard_dismisser.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {

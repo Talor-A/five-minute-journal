@@ -34,6 +34,15 @@ class LogService {
     var log = Log(text: text);
     return getUserLogs().add(log.toMap());
   }
+
+  Future<DocumentReference> newTodo(String text, {TodoStatus status}) {
+    var todo = Log(
+      text: text,
+      type: "todo",
+      status: status ?? TodoStatus.incomplete,
+    );
+    return getUserLogs().add(todo.toMap());
+  }
 }
 
 final LogService logService = LogService(Firestore.instance);
