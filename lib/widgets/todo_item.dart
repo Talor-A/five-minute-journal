@@ -10,15 +10,30 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Todo.isComplete(log)
-          ? Icon(Icons.check)
-          : Text(
-              '•',
-              style:
-                  TextStyle(color: Theme.of(context).textTheme.caption.color),
+    var textTheme = Theme.of(context).textTheme.body1;
+
+    if (Todo.isComplete(log))
+      textTheme = textTheme.copyWith(color: Theme.of(context).disabledColor);
+
+    return InkWell(
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 16.0),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                Todo.isComplete(log) ? '×' : '•',
+                style: textTheme,
+              ),
             ),
-      title: Text(log.text),
+            Text(
+              log.text,
+              style: textTheme,
+            ),
+          ],
+        ),
+      ),
       onTap: this.onTap,
     );
   }

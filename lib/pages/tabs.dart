@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:june_lake/model/log.dart';
-import 'package:june_lake/pages/agenda.dart';
+import 'package:june_lake/pages/todo_list.dart';
 import 'package:june_lake/pages/journal.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +8,7 @@ class TabNavigator extends StatelessWidget {
   final Function() onDrawerTap;
   final tabs = [
     Journal(),
-    Agenda(),
+    TodoList(),
   ];
 
   TabNavigator({Key key, this.onDrawerTap}) : super(key: key);
@@ -21,7 +21,7 @@ class TabNavigator extends StatelessWidget {
     int incompleteCount = list?.length ?? 0;
 
     var agendaTitle =
-        incompleteCount == 0 ? 'Agenda' : 'Agenda ($incompleteCount)';
+        incompleteCount == 0 ? 'Todos' : 'Todos ($incompleteCount)';
     var titles = [
       Tab(text: 'Journal'),
       Tab(text: agendaTitle),

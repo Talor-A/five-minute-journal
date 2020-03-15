@@ -32,36 +32,47 @@ var dark = MaterialColor(0xFF252529, {
   900: Color(0xFF0d0d0f),
 });
 
+var ddt = ThemeData.dark();
+var ltt = ThemeData.light();
+
 var darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    primaryColor: Color(0xFF6B64A8),
-    backgroundColor: Color(0xFF131513),
-    accentColor: Colors.pinkAccent,
-    canvasColor: Color(0xFF252529),
-    chipTheme: ThemeData.dark().chipTheme.copyWith(
-        backgroundColor: Color(0xFF464649),
-        secondarySelectedColor: Color(0xFF6B64A8),
-        selectedColor: Colors.pinkAccent,
-        secondaryLabelStyle:
-            ThemeData.dark().chipTheme.secondaryLabelStyle.copyWith(
-                  color: Colors.white,
-                )));
+  brightness: Brightness.dark,
+  primaryColor: Color(0xFF6B64A8),
+  backgroundColor: Color(0xFF131513),
+  accentColor: Colors.pinkAccent,
+  canvasColor: Color(0xFF252529),
+  textTheme: ddt.textTheme.copyWith(
+    body1: ddt.textTheme.body1.copyWith(fontSize: 16.0),
+    body2: ddt.textTheme.body1.copyWith(fontSize: 16.0),
+  ),
+  chipTheme: ddt.chipTheme.copyWith(
+    backgroundColor: Color(0xFF464649),
+    secondarySelectedColor: Color(0xFF6B64A8),
+    selectedColor: Colors.pinkAccent,
+    secondaryLabelStyle: ddt.chipTheme.secondaryLabelStyle.copyWith(
+      color: Colors.white,
+    ),
+  ),
+);
 
 var lightTheme = ThemeData(
-    brightness: Brightness.light,
-    // primaryColor: Colors.indigo,
-    primaryColor: Color(0xFF6B64A8),
-    accentColor: Colors.pinkAccent,
-    canvasColor: Color(0xFFF2F2F7),
-    // backgroundColor: Colors.indigo,
-    backgroundColor: Color(0xFF6B64A8),
-    chipTheme: ThemeData.light().chipTheme.copyWith(
-        secondarySelectedColor: Color(0xFF6B64A8),
-        selectedColor: Colors.pinkAccent,
-        secondaryLabelStyle:
-            ThemeData.light().chipTheme.secondaryLabelStyle.copyWith(
-                  color: Colors.white,
-                )));
+  brightness: Brightness.light,
+  primaryColor: Color(0xFF6B64A8),
+  accentColor: Colors.pinkAccent,
+  canvasColor: Color(0xFFF2F2F7),
+  backgroundColor: Color(0xFF6B64A8),
+  textTheme: ltt.textTheme.copyWith(
+    body1: ltt.textTheme.body1.copyWith(fontSize: 16.0),
+    body2: ltt.textTheme.body1.copyWith(fontSize: 16.0),
+  ),
+  chipTheme: ltt.chipTheme.copyWith(
+    secondarySelectedColor: Color(0xFF6B64A8),
+    selectedColor: Colors.pinkAccent,
+    secondaryLabelStyle: ltt.chipTheme.secondaryLabelStyle.copyWith(
+      color: Colors.white,
+    ),
+  ),
+);
 
 class ThemeProvider with ChangeNotifier {
   //List all themes. Here we have two themes: light and dark

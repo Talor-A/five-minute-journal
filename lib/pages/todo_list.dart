@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:june_lake/api/log_service.dart';
 import 'package:june_lake/model/log.dart';
 import 'package:june_lake/model/todo.dart';
+import 'package:june_lake/widgets/todo_item.dart';
 import 'package:provider/provider.dart';
 
-class Agenda extends StatelessWidget {
+class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,14 +53,12 @@ Widget _buildRow(context, Log log) {
   Widget tile;
 
   if (Todo.isTodo(log)) {
-    tile = ListTile(
-      leading: Text('•'),
-      title: Text(log.text),
+    tile = TodoItem(
+      log,
       onTap: () {
         Todo.toggle(log);
         logService.update(log);
       },
-      trailing: Todo.isComplete(log) ? Icon(Icons.check) : null,
     );
   } else {
     tile = ListTile(
