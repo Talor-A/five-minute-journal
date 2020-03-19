@@ -63,7 +63,7 @@ class Log {
         : DateTime.now();
     DateTime dueDate = data['due_date'] != null
         ? (data['due_date'] as Timestamp).toDate()
-        : DateTime.now();
+        : null;
 
     return Log(
       existsInDb: true,
@@ -81,6 +81,7 @@ class Log {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = new Map();
     map['created_at'] = Timestamp.fromDate(createdAt);
+    map['due_date'] = dueDate == null ? null : Timestamp.fromDate(dueDate);
     map['text'] = text;
     map['type'] = type;
     map['deleted'] = deleted;
@@ -88,7 +89,8 @@ class Log {
     return map;
   }
 
-  String get dateString => DateFormat("MMMd").format(createdAt);
+  String get dateString =>
+      DateFormat("EEEE, LLLL d").format(createdAt).toLowerCase();
 
   String get timeString => DateFormat.jms().format(createdAt);
 

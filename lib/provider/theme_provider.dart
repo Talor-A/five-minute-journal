@@ -20,34 +20,35 @@ var purple = MaterialColor(0xFF6B64A8, {
 
 var darkBG = Color(0xFF252529);
 var dark = MaterialColor(0xFF252529, {
-  50: Color(0xFFe5e5e5),
-  100: Color(0xFFbebebf),
-  200: Color(0xFF929294),
-  300: Color(0xFF666669),
-  400: Color(0xFF464649),
-  500: Color(0xFF252529),
-  600: Color(0xFF212124),
-  700: Color(0xFF1b1b1f),
-  800: Color(0xFF161619),
-  900: Color(0xFF0d0d0f),
+  50: Color(0xFFA5A5B8),
+  100: Color(0xFF9393A3),
+  200: Color(0xFF81818F),
+  300: Color(0xFF6E6E7A),
+  400: Color(0xFF5C5C66),
+  500: Color(0xFF494952),
+  600: Color(0xFF37373D),
+  700: Color(0xFF252529),
+  800: Color(0xFF131315),
+  900: Color(0xFF000000),
 });
 
 var ddt = ThemeData.dark();
 var ltt = ThemeData.light();
 
 var darkTheme = ThemeData(
+  primaryColorBrightness: Brightness.dark,
   brightness: Brightness.dark,
-  primaryColor: Color(0xFF6B64A8),
-  backgroundColor: Color(0xFF131513),
-  accentColor: Colors.pinkAccent,
-  canvasColor: Color(0xFF252529),
+  primaryColor: Colors.deepPurple[200],
+  backgroundColor: dark[800],
+  accentColor: Colors.pinkAccent[200],
+  canvasColor: dark[700],
   textTheme: ddt.textTheme.copyWith(
     body1: ddt.textTheme.body1.copyWith(fontSize: 16.0),
     body2: ddt.textTheme.body1.copyWith(fontSize: 16.0),
   ),
   chipTheme: ddt.chipTheme.copyWith(
-    backgroundColor: Color(0xFF464649),
-    secondarySelectedColor: Color(0xFF6B64A8),
+    backgroundColor: dark[600],
+    secondarySelectedColor: Colors.deepPurple[200],
     selectedColor: Colors.pinkAccent,
     secondaryLabelStyle: ddt.chipTheme.secondaryLabelStyle.copyWith(
       color: Colors.white,
@@ -107,6 +108,6 @@ class ThemeProvider with ChangeNotifier {
     }
   }
 
-  get currentTheme => _currentTheme;
-  get currentThemeData => _currentThemeData;
+  MyThemes get currentTheme => _currentTheme;
+  ThemeData get currentThemeData => _currentThemeData;
 }

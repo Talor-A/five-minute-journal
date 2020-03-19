@@ -15,7 +15,9 @@ class LogService {
   }
 
   Future<void> update(Log e) async {
-    return getUserLogs().document(e.uid).updateData(e.toMap());
+    var map = e.toMap();
+    map['updated_at'] = Timestamp.now();
+    return getUserLogs().document(e.uid).updateData(map);
   }
 
   void delete(Log e) async {
@@ -35,12 +37,13 @@ class LogService {
     return getUserLogs().add(log.toMap());
   }
 
-  Future<DocumentReference> newTodo(String text, {TodoStatus status}) {
+  Future<DocumentReference> newTodo(String text,
+      {TodoStatus status, DateTime dueDate}) {
     var todo = Log(
-      text: text,
-      type: "todo",
-      status: status ?? TodoStatus.incomplete,
-    );
+        text: text,
+        type: "todo",
+        status: status ?? TodoStatus.incomplete,
+        dueDate: dueDate);
     return getUserLogs().add(todo.toMap());
   }
 }

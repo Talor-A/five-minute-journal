@@ -3,6 +3,7 @@ import 'package:june_lake/api/log_service.dart';
 import 'package:june_lake/model/log.dart';
 import 'package:june_lake/model/todo.dart';
 import 'package:june_lake/widgets/editor.dart';
+import 'package:june_lake/widgets/mood_item.dart';
 import 'package:june_lake/widgets/text_item.dart';
 import 'package:june_lake/widgets/todo_item.dart';
 import 'package:provider/provider.dart';
@@ -35,13 +36,20 @@ class Logs extends StatelessWidget {
 }
 
 Widget _buildLogItem(Log log) {
-  if (Todo.isTodo(log)) {
-    return TodoItem(log, onTap: () {
-      Todo.toggle(log);
-      logService.update(log);
-    });
-  } else {
-    return TextItem(log, onDeletePressed: () => logService.delete(log));
+  switch (log.type) {
+    case "todo":
+      return TodoItem(log,
+          onDeletePressed: () => logService.delete(log),
+          onTap: () {
+            Todo.toggle(log);
+            logService.update(log);
+          });
+    case "text":
+      return TextItem(log, onDeletePressed: () => logService.delete(log));
+    case "mood":
+      return MoodItem(log);
+    default:
+      return Text(log.snap.data.toString());
   }
 }
 
@@ -59,7 +67,10 @@ Widget _buildRow(context, int index) {
         Container(
           child: Text(
             log.dateString,
-            style: TextStyle(color: Theme.of(context).primaryColor),
+            style: Theme.of(context)
+                .textTheme
+                .body2
+                .copyWith(color: Theme.of(context).primaryColor),
           ),
           padding: EdgeInsets.only(left: 16),
         ),

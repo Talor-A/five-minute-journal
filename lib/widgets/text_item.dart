@@ -21,16 +21,21 @@ class TextItem extends StatelessWidget {
       items: [MenuItem('delete', this.onDeletePressed)],
       child: InkWell(
         child: Container(
+          width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.only(top: paddingTop, bottom: paddingBottom),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text('–'),
               ),
-              Text(
-                log.text,
-              ),
+              Flexible(
+                child: Text(
+                  log.text,
+                  softWrap: true,
+                ),
+              )
             ],
           ),
         ),
