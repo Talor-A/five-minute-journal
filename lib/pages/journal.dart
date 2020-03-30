@@ -17,10 +17,30 @@ class Journal extends StatelessWidget {
       //         showBar: false,
       //       ))
       // ],
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.edit),
-          onPressed: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => TimedPage()))),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: 'fab-no-timer',
+            child: Icon(Icons.alarm_off),
+            backgroundColor: Colors.grey[200],
+            foregroundColor: Colors.black,
+            mini: true,
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => TimedPage(customTime: 0),
+              ),
+            ),
+          ),
+          FloatingActionButton(
+            heroTag: 'fab-timed-writing',
+            child: Icon(Icons.edit),
+            onPressed: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => TimedPage())),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -41,19 +61,31 @@ class Logs extends StatelessWidget {
   }
 }
 
-Widget _buildLogItem(Log log) {
+Widget _buildLogItem(BuildContext context, Log log) {
   switch (log.type) {
     case "text":
     // return TextItem(log, onDeletePressed: () => logService.delete(log));
     default:
-      return TextItem(log, onDeletePressed: () => logService.delete(log));
+      return TextItem(
+        log,
+        onDeletePressed: () => logService.delete(log),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TimedPage(
+              customTime: 0,
+              log: log,
+            ),
+          ),
+        ),
+      );
   }
 }
 
 Widget _buildRow(context, int index) {
   var entries = Provider.of<List<Log>>(context);
   Log log = entries[index];
-  Widget tile = _buildLogItem(log);
+  Widget tile = _buildLogItem(context, log);
 
   // add date header to first item of a certain date.
   //hack in lieu of a proper sectioned list.

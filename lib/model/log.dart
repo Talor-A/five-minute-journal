@@ -24,7 +24,11 @@ TodoStatus stringToStatus(String str) {
 class Log {
   String uid;
   String type;
-  String text;
+  String _text = '';
+
+  set text(String text) => this._text = text ?? '';
+  String get text => _text;
+
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -39,7 +43,7 @@ class Log {
   Log({
     this.uid,
     type,
-    this.text,
+    text = "",
     createdAt,
     updatedAt,
     this.dueDate,
@@ -51,6 +55,7 @@ class Log {
     this.createdAt = createdAt ?? DateTime.now();
     this.updatedAt = updatedAt ?? DateTime.now();
     this.type = type ?? 'text';
+    this.text = text;
   }
 
   factory Log.fromSnap(DocumentSnapshot snap) {

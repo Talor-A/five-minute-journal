@@ -6,12 +6,14 @@ import 'package:share/share.dart';
 
 class TextItem extends StatelessWidget {
   final Log log;
+  final void Function() onTap;
   final void Function() onDeletePressed;
   final double paddingTop;
   final double paddingBottom;
 
   const TextItem(this.log,
       {Key key,
+      this.onTap,
       this.onDeletePressed,
       this.paddingTop = 16.0,
       this.paddingBottom = 16.0})
@@ -43,7 +45,7 @@ class TextItem extends StatelessWidget {
               log.text,
               softWrap: true,
             )),
-        onTap: () {},
+        onTap: this.onTap,
       ),
     );
   }
