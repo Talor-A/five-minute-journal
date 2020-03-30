@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:june_lake/api/log_service.dart';
@@ -46,7 +45,7 @@ class TimedPageState extends State with TickerProviderStateMixin {
 
     writingTimer = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 10),
+      duration: Duration(minutes: 3),
       lowerBound: 0.0,
       upperBound: 1.0,
     )
@@ -61,8 +60,8 @@ class TimedPageState extends State with TickerProviderStateMixin {
       ..addListener(() => setState(() {}))
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          print('ded!!');
-          _neverSatisfied();
+          writingTimer.stop();
+          _whenAngerWins();
         }
       });
     angerTimer.value = 0.0;
@@ -149,7 +148,7 @@ class TimedPageState extends State with TickerProviderStateMixin {
     }
   }
 
-  Future<void> _neverSatisfied() async {
+  Future<void> _whenAngerWins() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -166,9 +165,12 @@ class TimedPageState extends State with TickerProviderStateMixin {
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('Retry'),
+              child: Text('Rewind and Retry'),
               onPressed: () {
                 Navigator.of(context).pop();
+                inputController.text = '';
+                angerTimer.reset();
+                writingTimer.reset();
               },
             ),
             FlatButton(
@@ -216,10 +218,10 @@ class TimedPageState extends State with TickerProviderStateMixin {
         if (hasTimer)
           LinearProgressIndicator(
             value: writingTimer.value,
-          ),
-        if (hasTimer)
-          LinearProgressIndicator(
-            value: angerTimer.value,
+            backgroundColor: ColorTween(
+              begin: Theme.of(context).backgroundColor,
+              end: Colors.red,
+            ).lerp(_angerAmount),
           ),
         Expanded(
           child: Container(

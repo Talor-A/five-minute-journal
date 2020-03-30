@@ -22,6 +22,7 @@ class Journal extends StatelessWidget {
         children: [
           FloatingActionButton(
             heroTag: 'fab-no-timer',
+            tooltip: 'write without a timer',
             child: Icon(Icons.alarm_off),
             backgroundColor: Colors.grey[200],
             foregroundColor: Colors.black,
