@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:june_lake/model/log.dart';
-import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:menu/menu.dart';
 
 class MoodItem extends StatelessWidget {

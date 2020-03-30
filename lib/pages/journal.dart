@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:june_lake/api/log_service.dart';
 import 'package:june_lake/model/log.dart';
-import 'package:june_lake/model/todo.dart';
-import 'package:june_lake/widgets/editor.dart';
-import 'package:june_lake/widgets/mood_item.dart';
+import 'package:june_lake/pages/timed_page.dart';
 import 'package:june_lake/widgets/text_item.dart';
-import 'package:june_lake/widgets/todo_item.dart';
 import 'package:provider/provider.dart';
 
 class Journal extends StatelessWidget {
@@ -13,9 +10,17 @@ class Journal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Logs(),
-      persistentFooterButtons: <Widget>[
-        SizedBox(width: MediaQuery.of(context).size.width, child: Editor())
-      ],
+      // persistentFooterButtons: <Widget>[
+      //   SizedBox(
+      //       width: MediaQuery.of(context).size.width,
+      //       child: Editor(
+      //         showBar: false,
+      //       ))
+      // ],
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.edit),
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => TimedPage()))),
     );
   }
 }
@@ -28,6 +33,7 @@ class Logs extends StatelessWidget {
     if (entries == null) return Text('loading...');
 
     return ListView.builder(
+        reverse: true,
         itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
           return _buildRow(context, index);
@@ -37,19 +43,10 @@ class Logs extends StatelessWidget {
 
 Widget _buildLogItem(Log log) {
   switch (log.type) {
-    case "todo":
-      return TodoItem(log,
-          onDeletePressed: () => logService.delete(log),
-          onTap: () {
-            Todo.toggle(log);
-            logService.update(log);
-          });
     case "text":
-      return TextItem(log, onDeletePressed: () => logService.delete(log));
-    case "mood":
-      return MoodItem(log);
+    // return TextItem(log, onDeletePressed: () => logService.delete(log));
     default:
-      return Text(log.snap.data.toString());
+      return TextItem(log, onDeletePressed: () => logService.delete(log));
   }
 }
 

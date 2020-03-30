@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:june_lake/pages/profile.dart';
 import 'package:june_lake/pages/tabs.dart';
@@ -16,12 +15,15 @@ class _FancyDrawerState extends State<FancyDrawer> {
   final GlobalKey<InnerDrawerState> _innerDrawerKey =
       GlobalKey<InnerDrawerState>();
 
-  GlobalKey _keyRed = GlobalKey();
-  double _width = 10;
+  // GlobalKey _keyRed = GlobalKey();
+  // double _width = 10;
+  // bool _onTapToClose = false;
+  // bool _tapScaffold = true;
+  // AnimationController _animationController;
+  // Animation<Color> _bkgColor;
+  // String _title = "Two";
 
-  bool _onTapToClose = false;
   bool _swipe = true;
-  bool _tapScaffold = true;
   InnerDrawerAnimation _animationType = InnerDrawerAnimation.static;
   bool _proportionalChildArea = true;
   double _horizontalOffset = 0.4;
@@ -29,11 +31,6 @@ class _FancyDrawerState extends State<FancyDrawer> {
   bool _topBottom = false;
   double _scale = 0.9;
   double _borderRadius = 50;
-
-  AnimationController _animationController;
-  Animation<Color> _bkgColor;
-
-  String _title = "Two";
 
   @override
   void initState() {
@@ -49,16 +46,16 @@ class _FancyDrawerState extends State<FancyDrawer> {
   Color currentColor = Colors.black54;
 
   void _getwidthContainer() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final keyContext = _keyRed.currentContext;
-      if (keyContext != null) {
-        final RenderBox box = keyContext.findRenderObject();
-        final size = box.size;
-        setState(() {
-          _width = size.width;
-        });
-      }
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   final keyContext = _keyRed.currentContext;
+    //   if (keyContext != null) {
+    //     final RenderBox box = keyContext.findRenderObject();
+    //     final size = box.size;
+    //     setState(() {
+    //       _width = size.width;
+    //     });
+    //   }
+    // });
   }
 
   @override

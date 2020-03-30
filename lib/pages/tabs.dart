@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:june_lake/model/log.dart';
-import 'package:june_lake/pages/mood_tracker.dart';
-import 'package:june_lake/pages/todo_list.dart';
 import 'package:june_lake/pages/journal.dart';
-import 'package:provider/provider.dart';
 
 class TabNavigator extends StatelessWidget {
   final Function() onDrawerTap;
@@ -11,18 +7,8 @@ class TabNavigator extends StatelessWidget {
   TabNavigator({Key key, this.onDrawerTap}) : super(key: key);
 
   List<List<Widget>> _getTabs(BuildContext context) {
-    var list = Provider.of<List<Log>>(context)?.toList();
-    list?.retainWhere(
-        (log) => log.type == "todo" && log.status == TodoStatus.incomplete);
-
-    int incompleteCount = list?.length ?? 0;
-
-    var agendaTitle =
-        incompleteCount == 0 ? 'Todos' : 'Todos ($incompleteCount)';
-
     return [
       [Tab(text: 'Journal'), Journal()],
-      [Tab(text: agendaTitle), TodoList()],
       // [Tab(text: 'Mood Tracker'), MoodTracker()],
     ];
   }

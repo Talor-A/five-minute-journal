@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:june_lake/api/auth.dart';
 import 'package:june_lake/pages/fancy_drawer.dart';
 import 'package:june_lake/pages/login.dart';
-import 'package:june_lake/pages/tabs.dart';
 import 'package:june_lake/provider/log_provider.dart';
 import 'package:june_lake/provider/theme_provider.dart';
 import 'package:june_lake/provider/keyboard_dismisser.dart';

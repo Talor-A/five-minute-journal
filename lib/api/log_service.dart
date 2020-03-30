@@ -9,7 +9,7 @@ class LogService {
 
   Stream<List<Log>> asList() {
     return getUserLogs()
-        .orderBy('created_at')
+        .orderBy('created_at', descending: true)
         .snapshots()
         .map((list) => list.documents.map((doc) => Log.fromSnap(doc)).toList());
   }

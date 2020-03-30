@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
-import 'package:intl/intl.dart';
 
 /// A quick example "keyboard" widget for picking a color.
 class ColorPickerKeyboard extends StatelessWidget
