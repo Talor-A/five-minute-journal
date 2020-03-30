@@ -57,7 +57,8 @@ Widget _buildRow(context, int index) {
 
   // add date header to first item of a certain date.
   //hack in lieu of a proper sectioned list.
-  if (index == 0 || log.dateString != entries[index - 1].dateString) {
+  if (index == entries.length - 1 ||
+      log.dateString != entries[index + 1].dateString) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
