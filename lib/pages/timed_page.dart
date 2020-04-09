@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:june_lake/api/log_service.dart';
-import 'package:june_lake/model/log.dart';
+import 'package:fiveminutejournal/api/log_service.dart';
+import 'package:fiveminutejournal/model/log.dart';
 import 'package:vector_math/vector_math_64.dart' as VectorMath;
 
 class TimedPage extends StatefulWidget {

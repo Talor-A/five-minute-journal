@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:june_lake/pages/journal.dart';
+import 'package:fiveminutejournal/pages/journal.dart';
 
 class TabNavigator extends StatelessWidget {
   final Function() onDrawerTap;

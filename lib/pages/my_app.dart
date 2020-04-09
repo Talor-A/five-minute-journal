@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:june_lake/api/auth.dart';
-import 'package:june_lake/pages/fancy_drawer.dart';
-import 'package:june_lake/pages/login.dart';
-import 'package:june_lake/provider/log_provider.dart';
-import 'package:june_lake/provider/theme_provider.dart';
-import 'package:june_lake/provider/keyboard_dismisser.dart';
+import 'package:fiveminutejournal/api/auth.dart';
+import 'package:fiveminutejournal/pages/fancy_drawer.dart';
+import 'package:fiveminutejournal/pages/login.dart';
+import 'package:fiveminutejournal/provider/log_provider.dart';
+import 'package:fiveminutejournal/provider/theme_provider.dart';
+import 'package:fiveminutejournal/provider/keyboard_dismisser.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {

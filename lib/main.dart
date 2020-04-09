@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:june_lake/provider/auth_provider.dart';
-import 'package:june_lake/provider/theme_provider.dart';
+import 'package:fiveminutejournal/provider/auth_provider.dart';
+import 'package:fiveminutejournal/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

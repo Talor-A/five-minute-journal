@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:june_lake/api/auth.dart';
-import 'package:june_lake/model/user.dart';
-import 'package:june_lake/provider/theme_provider.dart';
+import 'package:fiveminutejournal/api/auth.dart';
+import 'package:fiveminutejournal/model/user.dart';
+import 'package:fiveminutejournal/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {

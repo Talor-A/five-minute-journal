@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:june_lake/api/log_service.dart';
-import 'package:june_lake/model/log.dart';
-import 'package:june_lake/pages/timed_page.dart';
-import 'package:june_lake/widgets/text_item.dart';
+import 'package:fiveminutejournal/api/log_service.dart';
+import 'package:fiveminutejournal/model/log.dart';
+import 'package:fiveminutejournal/pages/timed_page.dart';
+import 'package:fiveminutejournal/widgets/text_item.dart';
 import 'package:provider/provider.dart';
 
 class Journal extends StatelessWidget {

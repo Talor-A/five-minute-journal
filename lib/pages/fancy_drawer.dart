@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
-import 'package:june_lake/pages/profile.dart';
-import 'package:june_lake/pages/tabs.dart';
+import 'package:fiveminutejournal/pages/profile.dart';
+import 'package:fiveminutejournal/pages/tabs.dart';
 
 class FancyDrawer extends StatefulWidget {
   FancyDrawer({Key key}) : super(key: key);

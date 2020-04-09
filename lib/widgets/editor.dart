@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:june_lake/api/log_service.dart';
-import 'package:june_lake/provider/theme_provider.dart';
-import 'package:june_lake/widgets/chips.dart';
+import 'package:fiveminutejournal/api/log_service.dart';
+import 'package:fiveminutejournal/provider/theme_provider.dart';
+import 'package:fiveminutejournal/widgets/chips.dart';
 import 'package:provider/provider.dart';
 
 class EditorState extends State {
