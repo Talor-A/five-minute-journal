@@ -33,8 +33,16 @@ class AuthService {
   listen() async {
     await for (FirebaseUser u in _firebaseAuth.onAuthStateChanged) {
       if (u != null) {
-        DocumentSnapshot snap =
-            await Firestore.instance.collection('users').document(u.uid).get();
+        DocumentReference ref =
+            Firestore.instance.collection('users').document(u.uid);
+        DocumentSnapshot snap = await ref.get();
+        if (snap == null || !snap.exists) {
+          await ref.setData({
+            if (u.displayName != null) 'name': u.displayName,
+            'email': u.email,
+          });
+          snap = await ref.get();
+        }
         User user = User.fromFirestore(snap);
         print(user);
         status.add(LoggedIn(user));
@@ -51,11 +59,16 @@ class AuthService {
     );
   }
 
-  Future<AuthResult> signUp({String email, String password}) async {
-    return await _firebaseAuth.createUserWithEmailAndPassword(
+  Future<AuthResult> signUp(
+      {String email, String password, String displayName}) async {
+    AuthResult res = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
+    var info = UserUpdateInfo();
+    info.displayName = displayName;
+    await res.user.updateProfile(info);
+    return res;
   }
 
   Future<void> signOut() async {

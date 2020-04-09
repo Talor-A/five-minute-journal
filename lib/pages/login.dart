@@ -511,8 +511,8 @@ class _LoginPageState extends State<LoginPage>
 
   void _doSignUp() async {
     String name = signupNameController.value.text;
-    String email = loginEmailController.value.text;
-    String password = loginPasswordController.value.text;
+    String email = signupEmailController.value.text;
+    String password = signupPasswordController.value.text;
 
     if (name.length == 0 || email.length == 0 || password.length == 0) {
       showInSnackBar("make sure you fill in all the fields first!");
@@ -524,10 +524,9 @@ class _LoginPageState extends State<LoginPage>
       AuthResult res = await auth.signUp(
         email: email,
         password: password,
+        displayName: name,
       );
-      var info = UserUpdateInfo();
-      info.displayName = name;
-      return res.user.updateProfile(info);
+      return;
     } catch (err) {
       assert(err is PlatformException);
       print(err.code);
