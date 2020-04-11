@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fiveminutejournal/api/log_service.dart';
 import 'package:fiveminutejournal/model/log.dart';
+import 'package:intl/intl.dart';
 import 'package:vector_math/vector_math_64.dart' as VectorMath;
 
 class TimedPage extends StatefulWidget {
@@ -108,6 +109,8 @@ class TimedPageState extends State with TickerProviderStateMixin {
     super.dispose();
   }
 
+  bool get writingTimerIsRunning =>
+      writingTimer.status != AnimationStatus.forward;
   double get _angerAmount => max(0.0, (angerTimer.value * 2) - 1);
 
   double _randDouble() => (rng.nextDouble() * 2) - 1;
@@ -158,8 +161,8 @@ class TimedPageState extends State with TickerProviderStateMixin {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('You will never be satisfied.'),
-                Text('You\’re like me. I’m never satisfied.'),
+                Text(
+                    'Sometimes you eat the bear, and sometimes, well, the bear eats you.'),
               ],
             ),
           ),
@@ -200,43 +203,62 @@ class TimedPageState extends State with TickerProviderStateMixin {
   }
 
   Widget _buildTitle(BuildContext context) {
-    return Text(((angerTimer.value * 10).round() / 10).toString());
+    if (!writingTimerIsRunning) return Text('');
+    int maxTime = writingTimer.duration.inSeconds;
+    int currentTime = (maxTime * (1 - writingTimer.value)).floor();
+    int minutes = (currentTime / 60).floor();
+    int seconds = currentTime % 60;
+    NumberFormat secFormat = NumberFormat('00');
+    return Text('$minutes:${secFormat.format(seconds)}');
+  }
+
+  Future<bool> _handleGoBack() async {
+    if (writingTimerIsRunning) return true;
+
+    final snackBar = SnackBar(
+      content: Text("Can't leave! Your timer is running!"),
+    );
+    _scaffoldKey?.currentState?.showSnackBar(snackBar);
+    return false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: _buildTitle(context),
-        backgroundColor: ColorTween(
-          begin: Theme.of(context).appBarTheme.color,
-          end: Colors.red,
-        ).lerp(_angerAmount),
-      ),
-      body: Column(children: [
-        if (hasTimer)
-          LinearProgressIndicator(
-            value: writingTimer.value,
-            backgroundColor: ColorTween(
-              begin: Theme.of(context).backgroundColor,
-              end: Colors.red,
-            ).lerp(_angerAmount),
-          ),
-        Expanded(
-          child: Container(
-            color: ColorTween(
-              begin: Theme.of(context).canvasColor,
-              end: Colors.red,
-            ).lerp(_angerAmount),
-            padding: EdgeInsets.all(16.0),
-            child: Transform(
-              transform: Matrix4.translation(_shake()),
-              child: _buildTextField(context),
+    return WillPopScope(
+      onWillPop: _handleGoBack,
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          title: _buildTitle(context),
+          backgroundColor: ColorTween(
+            begin: Theme.of(context).appBarTheme.color,
+            end: Colors.red,
+          ).lerp(_angerAmount),
+        ),
+        body: Column(children: [
+          if (hasTimer)
+            LinearProgressIndicator(
+              value: writingTimer.value,
+              backgroundColor: ColorTween(
+                begin: Theme.of(context).backgroundColor,
+                end: Colors.red,
+              ).lerp(_angerAmount),
+            ),
+          Expanded(
+            child: Container(
+              color: ColorTween(
+                begin: Theme.of(context).canvasColor,
+                end: Colors.red,
+              ).lerp(_angerAmount),
+              padding: EdgeInsets.all(16.0),
+              child: Transform(
+                transform: Matrix4.translation(_shake()),
+                child: _buildTextField(context),
+              ),
             ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }
