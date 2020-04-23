@@ -61,7 +61,70 @@ flutter:
   # To add assets to your application, add an assets section, like this:
 
   assets:
-    - assets/login_logo.png
+    - assets/img/open-doodles/png/PlantDoodle.png
+    - assets/img/open-doodles-dark/png/PlantDoodle.png
+    - assets/img/open-doodles/png/MessyDoodle.png
+    - assets/img/open-doodles-dark/png/MessyDoodle.png
+    - assets/img/open-doodles/png/FloatDoodle.png
+    - assets/img/open-doodles-dark/png/FloatDoodle.png
+    - assets/img/open-doodles/png/SwingingDoodle.png
+    - assets/img/open-doodles-dark/png/SwingingDoodle.png
+    - assets/img/open-doodles/png/DoogieDoodle.png
+    - assets/img/open-doodles-dark/png/DoogieDoodle.png
+    - assets/img/open-doodles/png/DogJumpDoodle.png
+    - assets/img/open-doodles-dark/png/DogJumpDoodle.png
+    - assets/img/open-doodles/png/DancingDoodle.png
+    - assets/img/open-doodles-dark/png/DancingDoodle.png
+    - assets/img/open-doodles/png/PettingDoodle.png
+    - assets/img/open-doodles-dark/png/PettingDoodle.png
+    - assets/img/open-doodles/png/ReadingSideDoodle.png
+    - assets/img/open-doodles-dark/png/ReadingSideDoodle.png
+    - assets/img/open-doodles/png/SleekDoodle.png
+    - assets/img/open-doodles-dark/png/SleekDoodle.png
+    - assets/img/open-doodles/png/ReadingDoodle.png
+    - assets/img/open-doodles-dark/png/ReadingDoodle.png
+    - assets/img/open-doodles/png/UnboxingDoodle.png
+    - assets/img/open-doodles-dark/png/UnboxingDoodle.png
+    - assets/img/open-doodles/png/SitReadingDoodle.png
+    - assets/img/open-doodles-dark/png/SitReadingDoodle.png
+    - assets/img/open-doodles/png/MoshingDoodle.png
+    - assets/img/open-doodles-dark/png/MoshingDoodle.png
+    - assets/img/open-doodles/png/MeditatingDoodle.png
+    - assets/img/open-doodles-dark/png/MeditatingDoodle.png
+    - assets/img/open-doodles/png/IceCreamDoodle.png
+    - assets/img/open-doodles-dark/png/IceCreamDoodle.png
+    - assets/img/open-doodles/png/GroovyDoodle.png
+    - assets/img/open-doodles-dark/png/GroovyDoodle.png
+    - assets/img/open-doodles/png/BalletDoodle.png
+    - assets/img/open-doodles-dark/png/BalletDoodle.png
+    - assets/img/open-doodles/png/CoffeeDoddle.png
+    - assets/img/open-doodles-dark/png/CoffeeDoddle.png
+    - assets/img/open-doodles/png/StrollingDoodle.png
+    - assets/img/open-doodles-dark/png/StrollingDoodle.png
+    - assets/img/open-doodles/png/RollingDoodle.png
+    - assets/img/open-doodles-dark/png/RollingDoodle.png
+    - assets/img/open-doodles/png/DumpingDoodle.png
+    - assets/img/open-doodles-dark/png/DumpingDoodle.png
+    - assets/img/open-doodles/png/SprintingDoodle.png
+    - assets/img/open-doodles-dark/png/SprintingDoodle.png
+    - assets/img/open-doodles/png/BikiniDoodle.png
+    - assets/img/open-doodles-dark/png/BikiniDoodle.png
+    - assets/img/open-doodles/png/ZombieingDoodle.png
+    - assets/img/open-doodles-dark/png/ZombieingDoodle.png
+    - assets/img/open-doodles/png/GroovySittingDoodle.png
+    - assets/img/open-doodles-dark/png/GroovySittingDoodle.png
+    - assets/img/open-doodles/png/SelfieDoodle.png
+    - assets/img/open-doodles-dark/png/SelfieDoodle.png
+    - assets/img/open-doodles/png/SittingDoodle.png
+    - assets/img/open-doodles-dark/png/SittingDoodle.png
+    - assets/img/open-doodles/png/RunningDoodle.png
+    - assets/img/open-doodles-dark/png/RunningDoodle.png
+    - assets/img/open-doodles/png/RollerSkatingDoodle.png
+    - assets/img/open-doodles-dark/png/RollerSkatingDoodle.png
+    - assets/img/open-doodles/png/LovingDoodle.png
+    - assets/img/open-doodles-dark/png/LovingDoodle.png
+    - assets/img/open-doodles/png/LayingDoodle.png
+    - assets/img/open-doodles-dark/png/LayingDoodle.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
