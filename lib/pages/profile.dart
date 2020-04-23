@@ -10,7 +10,13 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     User user = Provider.of<AuthState>(context).user;
 
-    var text = (user == null) ? 'no user' : 'hi ${user.name}!';
+    var text;
+    if (user == null)
+      text = 'no user';
+    else if (user.name == null)
+      text = 'hi ' + user.email;
+    else
+      text = 'hi ${user.name}!';
 
     return Theme(
       // Find and extend the parent theme using "copyWith".
